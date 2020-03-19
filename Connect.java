@@ -142,7 +142,6 @@ class Distance {
         for (int i = 200; i < maxCol; i += 60) {
             gridTable.add(new Point(rowNum, i));
             for (Point w : gridTable) {
-                //for (Point j : player) {
                 if (player.contains(w)) {
                     count++;
                     if (count >= 4) {
@@ -157,30 +156,25 @@ class Distance {
             count = 0;
         }
 
-        //Vertical check
         for (int i = 200; i < maxRow; i += 60) {
             Point point = new Point(i, colNum);
             gridTable.add(point);
             for (Point w : gridTable) {
                 if (player.contains(w)) {
                     count++;
-                    if (player.contains(w)) {
-                        count++;
-                        if (count >= 4) {
-                            win = 1;
-                            System.out.println("Horizontal win");
-                        }
+                    if (count >= 4) {
+                        win = 1;
+                        System.out.println("Horizontal win");
                     }
                 }
-            }
-            if (count < 4) {
+            } if(count < 4) {
                 count = 0;
-            } gridTable.clear();
-        }
+            }
+        } gridTable.clear();
+
 
         // top-left to bottom-right - green diagonals
         for (rowStart = 200; rowStart < maxRow - (4 * 60); rowStart += 60) {
-            count = 0;
             int row, col;
             for (row = rowStart, col = 200; row < maxRow && col < maxCol; row += 60, col += 60) {
                 Point point = new Point(row, col);
@@ -188,21 +182,19 @@ class Distance {
                 for (Point w : gridTable) {
                     if (player.contains(w)) {
                         count++;
-                        if (player.contains(w)) {
-                            count++;
-                            if (count >= 4) {
-                                win = 1;
-                                System.out.println("Horizontal win");
-                            }
+                        if (count >= 4) {
+                            win = 1;
+                            System.out.println("top left winner");
                         }
                     }
+                } if(count < 4) {
+                    count = 0;
                 }
             }
         } gridTable.clear();
 
         // top-left to bottom-right - red diagonals
         for(int colStart = 200; rowStart < maxCol - (4 * 60); rowStart+=60) {
-            count = 0;
             int row, col;
             for (row = rowStart, col = colStart; row < maxRow && col < maxCol; row += 60, col += 60) {
                 Point point = new Point(row, col);
@@ -213,12 +205,15 @@ class Distance {
                         count++;
                         if (count >= 4) {
                             win = 1;
-                            System.out.println("Horizontal win");
+                            System.out.println("top left");
                         }
                     }
                 }
+            } if(count < 0) {
+                count = 0;
             }
-        } gridTable.clear();
+        }
+        gridTable.clear();
     }
 
 
